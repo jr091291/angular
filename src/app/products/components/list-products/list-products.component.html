@@ -1,0 +1,8 @@
+<a mat-button (click)="createProduct()">Agregar producto</a>
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-lg-4 space-box" *ngFor="let product of products">
+      <div class="box">
+        <app-product (productClicked)='clickProduct($event)' [product]="product"></app-product>
+      </div>
+  </div>
+</div>
