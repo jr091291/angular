@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/for
 import { ProductsService } from './../../../core/services/product/products.service';
 import { Router } from '@angular/router';
 import { MyValidators } from './../../../utils/my-validators';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-product',
@@ -12,11 +16,13 @@ import { MyValidators } from './../../../utils/my-validators';
 export class CreateProductComponent implements OnInit {
 
   form: FormGroup;
+  image$: Observable<any>;
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsService,
-    private router: Router) {
+    private router: Router,
+    private afs: AngularFireStorage) {
     this.builFormProduct();
    }
 
@@ -50,4 +56,21 @@ export class CreateProductComponent implements OnInit {
     return this.form.get('price');
   }
 
+  uploadFile(event){
+    const file = event.target.files[0];
+    const name = 'image.png';
+    const fileRef = this.afs.ref(name);
+    const task = this.afs.upload(name, file);
+
+    task.snapshotChanges()
+    .pipe(
+      finalize(() => {
+        this.image$ = fileRef.getDownloadURL();
+        this.image$.subscribe(url=>{
+          this.form.get('image').setValue(url);
+        })
+      })
+    )
+    .subscribe()
+  }
 }

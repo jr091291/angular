@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cursoplatzy-5a04f": {
+      "hosting": {
+        "HireUs": [
+          "cursoplatzy-5a04f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cursoplatzy-5a04f"
+  }
+}

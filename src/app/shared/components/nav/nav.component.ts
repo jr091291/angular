@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { map } from 'rxjs/operators';
 
 import { CartService } from './../../../core/services/cart/cart.service';
+import { AuthService } from './../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,15 +14,30 @@ import { CartService } from './../../../core/services/cart/cart.service';
 })
 export class NavComponent implements OnInit {
 
-  total = 0;
+  total$: Observable<number>;
 
-  constructor(private cartService: CartService) {
-    this.cartService.cart$.subscribe(products => {
-      this.total = products.length;
-    });
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+    ) {
+    // this.cartService.cart$.subscribe(products => {
+    //   this.total = products.length;
+    // });
+    this.total$ = this.cartService.cart$
+    .pipe(
+      map(products => products.length) 
+    )
    }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.authService.logout()
+    .then(()=>{
+      this.router.navigate(['']);
+    })
   }
 
 }

@@ -16,6 +16,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -38,7 +40,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatMenuModule,
     MatTableModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatStepperModule
   ],
   exports: [
     MatToolbarModule,
@@ -59,7 +62,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatMenuModule,
     MatTableModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

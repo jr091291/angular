@@ -1,0 +1,34 @@
+<form [formGroup]="createUserForm" (ngSubmit)="saveUser($event)"> 
+    <mat-card>
+        <mat-card-header>
+            Bienvenido
+        </mat-card-header>
+        <mat-card-content>
+
+            <div class="col-xs">
+                <mat-form-field>
+                    <input matInput formControlName="mail" placeholder="Email"  type="text">
+                </mat-form-field>
+                <div *ngIf="createUserForm.get('mail').errors && createUserForm.get('mail').dirty">
+                    <mat-error *ngIf="createUserForm.get('mail').hasError('required')">el campo es requerido</mat-error>
+                </div>
+            </div>
+            
+            <div class="col-xs">
+                <mat-form-field>
+                    <input matInput formControlName="pass" placeholder="Password"  type="password">
+                </mat-form-field>
+                <div *ngIf="createUserForm.get('pass').errors && createUserForm.get('pass').dirty">
+                    <mat-error *ngIf="createUserForm.get('pass').hasError('required')">el campo es requerido</mat-error>
+                </div>
+            </div>
+            
+            
+            <mat-card-actions>
+                <button mat-raised-button type="submit" color="primary" [disabled]="createUserForm.invalid">Registrarme</button>
+            </mat-card-actions>
+ 
+        </mat-card-content>
+    </mat-card>
+ </form>
+ 

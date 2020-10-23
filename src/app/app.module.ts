@@ -8,9 +8,15 @@ import { MaterialModule } from './material/material.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+
 import { LayoutComponent } from './layout/layout.component';
 import { AppComponent } from './app.component';
 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,11 @@ import { AppComponent } from './app.component';
     MaterialModule,
     SharedModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
